@@ -6,9 +6,14 @@ plugins {
     id("com.google.gms.google-services")
 }
 
+
 android {
     namespace = "kr.hs.dgsw.chatting"
-    compileSdk = 33
+    compileSdk = 34
+
+    buildFeatures{
+        viewBinding = true
+    }
 
     defaultConfig {
         applicationId = "kr.hs.dgsw.chatting"
@@ -49,6 +54,8 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:32.6.0"))
     implementation("com.google.firebase:firebase-messaging-ktx")
     implementation("com.google.firebase:firebase-database-ktx")
+    implementation("com.google.firebase:firebase-auth-ktx")
+
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
