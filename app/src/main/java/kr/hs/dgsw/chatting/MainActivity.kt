@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // 디폴트로 설정되있는 설정
         binding.bottomNavigationView.selectedItemId = R.id.myPage
 
 
