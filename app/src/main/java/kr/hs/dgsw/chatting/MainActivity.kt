@@ -7,19 +7,20 @@ import android.util.Log
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import kr.hs.dgsw.chatting.chatlist.ChatListFragment
 import kr.hs.dgsw.chatting.databinding.ActivityMainBinding
+import kr.hs.dgsw.chatting.mypage.MyPageFragment
 import kr.hs.dgsw.chatting.userlist.UserFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val userFragment = UserFragment()
+    private val chatFragment = ChatListFragment()
+    private val mypageFragment = MyPageFragment()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        // 디폴트로 설정되있는 설정
-        binding.bottomNavigationView.selectedItemId = R.id.myPage
 
 
         val currentUser = Firebase.auth.currentUser
@@ -42,13 +43,16 @@ class MainActivity : AppCompatActivity() {
                     replaceFragment(userFragment)
                     return@setOnItemSelectedListener true
                 }
+
                 // 가저온 아이디가 chatroomList일때
                 R.id.chatroomList ->{
+                    replaceFragment(chatFragment)
                     return@setOnItemSelectedListener true
                 }
 
                 // 가저온 아이디가 myPage일때
                 R.id.myPage ->{
+                    replaceFragment(mypageFragment)
                     return@setOnItemSelectedListener true
                 }
                 // 예외
@@ -58,6 +62,12 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+        // 디폴트로 선택되있는 설정
+//        binding.bottomNavigationView.selectedItemId = R.id.myPage
+
+        // 처음에 디폴트로 실행
+        replaceFragment(userFragment)
+
     }
 
     private fun replaceFragment(fragment: Fragment){
